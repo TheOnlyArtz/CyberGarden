@@ -8,6 +8,7 @@ abstract struct Cybergarden::Items::Server
     getter price : Int32 # money per second
     getter maintability : Int32  
     getter type  : Int32
+    getter name : String
 
     def initialize()
         @capacity = 0_i32
@@ -15,6 +16,7 @@ abstract struct Cybergarden::Items::Server
         @price = 0_i32
         @maintability = 0_i32
         @type = 0_i32
+        @name = ""
     end
     
     def get_mps()
@@ -31,6 +33,7 @@ abstract struct Cybergarden::Items::Server
     end
 
     def self.from_h(payload : Hash(String, RethinkDB::QueryResult)) : Cybergarden::Items::Server
-        Cybergarden::Items::ServerTypes[payload["type"].as_i].new payload["processors"].as_a
+        Cybergarden::Items::ServerTypes[payload["type"].as_i]
+            .new(payload["processors"].as_a, payload["name"].to_s)
     end
 end
