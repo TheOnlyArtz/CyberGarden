@@ -9,9 +9,8 @@ module Cybergarden::Items
             @type = 0
 
             @processors = processors.map { |cpu|
-                Cybergarden::Items::CpuTypes[cpu["type"].as_i]
-                .new
-                .as(Cybergarden::Items::Cpu)
+                Cybergarden::Items::CpuTypes
+                .from_value(cpu["type"].as_i).new
             }
         end
     end
