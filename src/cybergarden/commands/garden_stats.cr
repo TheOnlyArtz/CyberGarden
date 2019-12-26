@@ -8,7 +8,7 @@ garden = Cybergarden::Utilities.get_garden(message.author.id, cybergarden)
     return
   end
 
-  money = add_money_accordingly(message.author.id, garden.last_money_gain, garden, cybergarden.rethink.connection)
+  money = Cybergarden::Utilities.add_money_accordingly(message.author.id, garden.last_money_gain, garden, cybergarden.rethink.connection)
 
   embed = Discord::Embed.new(
     title: "Stats for #{message.author.username}'s garden",
