@@ -27,7 +27,9 @@ module Cybergarden
     end
 
     module Commands
+    end
 
+    module Utilities
     end
 end
 
