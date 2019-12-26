@@ -1,12 +1,13 @@
 def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
                                         message : Discord::Message,
                                         args : Array(String)) : Nil
-garden = Cybergarden::Utilities.get_garden(message.author.id, cybergarden)
 
-  if garden == nil
+
+  if !Cybergarden::Utilities.get_garden?(message.author.id, cybergarden)
     cybergarden.client.create_message(message.channel_id, "Looks like you don't own a garden :[ Please create one before proceeding!")
     return
   end
+  garden = Cybergarden::Utilities.get_garden(message.author.id, cybergarden)
 
   money = Cybergarden::Utilities.add_money_accordingly(message.author.id, garden.last_money_gain, garden, cybergarden.rethink.connection)
 
