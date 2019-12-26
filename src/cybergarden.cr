@@ -29,6 +29,7 @@ cybergarden.client.on_message_create  do |msg|
   command = tokens[0]
   tokens.delete_at(0)
 
+  
   if command == "init"
     Cybergarden::Commands.initialize_garden(cybergarden, msg, tokens)
   elsif command == "stats"
