@@ -25,5 +25,9 @@ module Cybergarden
             @connection= r.connect(host: "localhost")
         end
     end
+
+    module Commands
+
+    end
 end
 
