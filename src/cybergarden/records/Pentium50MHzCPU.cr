@@ -6,6 +6,7 @@ module Cybergarden::Items
             @power = 50 # Power is in MHz
             @mps = 10
             @type = 0
+            @name = "Pentium50MHzCPU"
         end
     end
 end
