@@ -24,6 +24,11 @@ garden = Cybergarden::Utilities.get_garden(message.author.id, cybergarden)
         inline: true,
         name: "Money per second",
         value: garden.get_mps.to_s
+      ),
+      Discord::EmbedField.new(
+        inline: true,
+        name: "Total Servers",
+        value: garden.servers.size.to_s
       )
     ],
     colour: 16728579_u32
