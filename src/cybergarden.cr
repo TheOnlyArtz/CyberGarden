@@ -33,6 +33,8 @@ cybergarden.client.on_message_create  do |msg|
     Cybergarden::Commands.initialize_garden(cybergarden, msg, tokens)
   elsif command == "stats"
     Cybergarden::Commands.garden_stats(cybergarden, msg, tokens)
+  elsif command == "shop"
+    Cybergarden::Commands.shop(cybergarden, msg, tokens)
   end
 end
 
