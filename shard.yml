@@ -11,7 +11,10 @@ targets:
 dependencies:
   discordcr:
     github: discordcr/discordcr
+    branch: master
 
+  crystal-rethinkdb:
+    github: kingsleyh/crystal-rethinkdb
 crystal: 0.31.1
 
 license: MIT

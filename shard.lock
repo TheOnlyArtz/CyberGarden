@@ -1,6 +1,10 @@
 version: 1.0
 shards:
+  crystal-rethinkdb:
+    github: kingsleyh/crystal-rethinkdb
+    version: 0.1.10
+
   discordcr:
     github: discordcr/discordcr
-    version: 0.4.0
+    commit: 2fefc6c544c23475252438a6ca29d763eb1755fa
 
