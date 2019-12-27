@@ -64,7 +64,7 @@ end
 
 SERVER_TYPES = {
     CyberServerTierOne => {
-        "price" => 1e7.to_i,
+        "price" => 1e6.to_i,
         "maintability" => 1,
         "capacity" => 10,
         "type" => 0
@@ -96,7 +96,7 @@ module Cybergarden::Items
             end
 
             def self.description
-                "#{@@type}) **Name:** #{self.name.split("Cybergarden::Items::")[1]} | **Price:** #{@@price}$ | **Capacity:** #{@@capacity}"
+                "#{@@type}) **Name:** #{self.name.split("Cybergarden::Items::")[1]} | **Price:** #{@@price.humanize(precision: 2)}$ | **Capacity:** #{@@capacity}"
             end
         end
     {% end %}
