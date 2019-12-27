@@ -61,3 +61,43 @@ abstract struct Cybergarden::Items::Server
             .new(payload["processors"].as_a, payload["name"].to_s)
     end
 end
+
+SERVER_TYPES = {
+    CyberServerTierOne => {
+        "price" => 1e7.to_i,
+        "maintability" => 1,
+        "capacity" => 10,
+        "type" => 0
+    }
+}
+module Cybergarden::Items
+    {% for server_type in SERVER_TYPES %}
+        struct {{server_type}} < Cybergarden::Items::Server
+            p {{server_type}}
+            class_getter price : Int32 = {{SERVER_TYPES[server_type]["price"]}}
+            class_getter maintability : Int32 = {{SERVER_TYPES[server_type]["maintability"]}}
+            class_getter capacity : Int32 = {{SERVER_TYPES[server_type]["capacity"]}}
+            class_getter type : Int32 = {{SERVER_TYPES[server_type]["type"]}}
+
+            def initialize(processors : Array(RethinkDB::QueryResult), @name : String)
+                @capacity = @@capacity
+                @price = @@price
+                @maintability = @@maintability # fairly low
+                @type = @@type
+                @processors = Array(Cybergarden::Items::Cpu).new
+    
+                processors.each { |cpu|
+                    cpu["count"].as_i.times { |s|
+                        a = Cybergarden::Items::CpuTypes
+                        .from_value(cpu["type"].as_i).to_cpu
+                        @processors << a
+                    }
+                }
+            end
+
+            def self.description
+                "#{@@type}) **Name:** #{self.name.split("Cybergarden::Items::")[1]} | **Price:** #{@@price}$ | **Capacity:** #{@@capacity}"
+            end
+        end
+    {% end %}
+end
