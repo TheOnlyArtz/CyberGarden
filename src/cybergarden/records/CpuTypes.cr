@@ -23,7 +23,7 @@ end
   
 record Cybergarden::Items::Cpu, type : CpuTypes, name : String, price : Int32, power : Int32, mps : Int32 do
   def description
-    "#{type.to_i}) **Name:** #{@name} | **Price:** #{@price}$ | **MPS:** #{@mps}$ | **Power:** #{@power}MHz"
+    "#{type.to_i}) **Name:** #{@name} | **Price:** #{@price.humanize(precision: 2)}$ | **MPS:** #{@mps.humanize(precision: 2)}$ | **Power:** #{@power}MHz"
   end
 
   # Only serialize what the database needs
@@ -33,4 +33,4 @@ record Cybergarden::Items::Cpu, type : CpuTypes, name : String, price : Int32, p
       "count" => 0
     } # The count will be modified whenever needed by outside methods
   end
-end*
+end
