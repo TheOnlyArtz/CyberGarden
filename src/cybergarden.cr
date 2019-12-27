@@ -4,7 +4,6 @@ require "crystal-rethinkdb"
 require "json"
 
 require "./cybergarden/index.cr"
-require "./cybergarden/records/CyberServerTierOne"
 require "./cybergarden/records/Garden"
 require "./cybergarden/utils/*"
 require "./cybergarden/commands/*"
