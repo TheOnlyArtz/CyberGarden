@@ -25,13 +25,37 @@ abstract struct Cybergarden::Items::Server
         mps
     end
 
-    def as_h()
+    def as_h() : Hash(String, Int32 | String | Array(Hash(String, Int32)))
+        prcsrs = Array(Hash(String, Int32)).new
+        
+        @processors.each do |pc|
+            if prcsrs.find {|s| s["type"] == pc.type.to_i} == nil
+                prcsrs << {"type" => pc.type.to_i, "count" => 1}
+                next
+            end
+
+            curr = prcsrs.find{|s| s["type"] == pc.type.to_i}.not_nil!
+            curr["count"] +=  1 
+        end
+
+        # pp "START", prcsrs, "END"
         {
-            processors: @processors.map &.as_h,
-            type: @type
+            "processors" => prcsrs,
+            "name" => @name,
+            "type" => @type
         } 
     end
 
+    def size() : Int32
+        prcsrs = self.as_h["processors"]
+        size = 0
+        
+        prcsrs.as(Array(Hash(String, Int32))).each do |pc|
+            size += pc["count"]
+        end
+
+        size
+    end
     def self.from_h(payload : Hash(String, RethinkDB::QueryResult)) : Cybergarden::Items::Server
         Cybergarden::Items::ServerTypes[payload["type"].as_i]
             .new(payload["processors"].as_a, payload["name"].to_s)

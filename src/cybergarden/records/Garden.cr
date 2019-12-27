@@ -18,6 +18,15 @@ struct Cybergarden::Garden
         }
     end
 
+    def as_h
+        {
+            "owner_id" => @owner_id,
+            "last_money_gain" => @last_money_gain,
+            "money" => @money,
+            "servers" => @servers.map &.as_h
+        }
+    end
+
     def get_mps()
         mps = 0
         servers.each {|server| mps += server.get_mps}

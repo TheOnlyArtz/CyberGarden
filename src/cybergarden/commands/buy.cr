@@ -18,26 +18,45 @@ def Cybergarden::Commands.buy(cybergarden : Cybergarden::Client,
     
     product, type, amount, name = args
 
-    pp product, type, amount
     if product == "SERVER"
         
         if type.to_i == Cybergarden::Items::ServerTypes.size || type.to_i < 0
             cybergarden.client.create_message(message.channel_id, "X - This item does not exist! please try again.")
             return
-        end
-
-        if garden.servers.find {|i| i.name == name} != nil
+        elsif garden.servers.find {|i| i.name == name} != nil
             cybergarden.client.create_message(message.channel_id, "X - You already own a server with that name.")
             return
-        end
-
-        if money < Cybergarden::Items::ServerTypes[type.to_i].price
-            cybergarden.client.create_message(message.channel_id, "X - You don't have enough money! Balance: #{money}")
+        elsif money < Cybergarden::Items::ServerTypes[type.to_i].price
+            cybergarden.client.create_message(message.channel_id, "X - You don't have enough money! Balance: **#{money}**")
             return
         end
         Cybergarden::Utilities.add_server(type.to_i, garden, money, name, cybergarden)
         cybergarden.client.create_message(message.channel_id, "You've just bought a new server! Enjoy **#{name}** it's all yours.")
-    end
+    
+    elsif product == "CPU"
+        if type.to_i == Cybergarden::Items::CpuTypes.values.size || type.to_i < 0
+            cybergarden.client.create_message(message.channel_id, "X - This item does not exist! please try again.")
+            return   
+        elsif garden.servers.find {|i| i.name == name} == nil
+            cybergarden.client.create_message(message.channel_id, "X - This server doesn't exist.")
+            return
+        elsif money < Cybergarden::Items::CpuTypes.from_value(type.to_i).to_cpu.price * amount.to_i
+            cybergarden.client.create_message(message.channel_id, "X - You don't have enough money! Balance: **#{money}**")
+            return
+        end
+        server = garden.servers.find {|i| i.name == name}.not_nil! 
+        if server.size + amount.to_i > server.capacity
+            cybergarden.client.create_message(message.channel_id, "X - You don't have enough place for all of these CPUs in **#{name}**!")
+            return
+        end
 
+        if amount.to_i <= 0
+            cybergarden.client.create_message(message.channel_id, "X - Come on this amount is foolish")
+            return
+        end
+
+        Cybergarden::Utilities.add_cpu(type.to_i, garden, money, name, amount.to_i, cybergarden)
+        cybergarden.client.create_message(message.channel_id, "You've just bought a new CPU! Enjoy! (amount: **#{amount}**)")
+    end
 nil
 end

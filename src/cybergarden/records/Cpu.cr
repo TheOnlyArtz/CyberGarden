@@ -15,7 +15,7 @@ abstract struct Cybergarden::Items::Cpu
     
     def as_h()
         {
-            type: @type
+            "type" => @type
         }
     end
 end

@@ -11,6 +11,15 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
 
   money = Cybergarden::Utilities.add_money_accordingly(message.author.id, garden.last_money_gain, garden, cybergarden.rethink.connection)
 
+  description = garden.servers.map do |e|
+    "[#{e.name}] -> #{e.size} CPUs out of #{e.capacity}"
+  end
+  
+  description.unshift("```css")
+  description.unshift("")
+  description << ("\n```")
+  description = description.join("\n")
+
   embed = Discord::Embed.new(
     title: "Stats for #{message.author.username}'s garden",
     timestamp: Time.utc,
@@ -32,8 +41,11 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
         value: garden.servers.size.to_s
       )
     ],
+    description: description,
     colour: 16728579_u32
   )
+
+  
   cybergarden.client.create_message(message.channel_id, content: "", embed: embed)
 
   nil

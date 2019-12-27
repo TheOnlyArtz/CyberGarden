@@ -9,7 +9,7 @@ def Cybergarden::Commands.initialize_garden(cybergarden : Cybergarden::Client,
     
     payload = {
         id: message.author.id.to_s,
-        money: 12000,
+        money: 102000,
         last_money_gain: Time.utc.to_unix,
         servers: [] of Nil
     }
