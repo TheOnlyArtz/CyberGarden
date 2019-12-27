@@ -27,7 +27,7 @@ def Cybergarden::Commands.buy(cybergarden : Cybergarden::Client,
             cybergarden.client.create_message(message.channel_id, "X - You already own a server with that name.")
             return
         elsif money < Cybergarden::Items::ServerTypes[type.to_i].price
-            cybergarden.client.create_message(message.channel_id, "X - You don't have enough money! Balance: **#{money}**")
+            cybergarden.client.create_message(message.channel_id, "X - You don't have enough money! Balance: **#{money.humanize(precision: 2)}**")
             return
         end
         Cybergarden::Utilities.add_server(type.to_i, garden, money, name, cybergarden)
@@ -41,7 +41,7 @@ def Cybergarden::Commands.buy(cybergarden : Cybergarden::Client,
             cybergarden.client.create_message(message.channel_id, "X - This server doesn't exist.")
             return
         elsif money < Cybergarden::Items::CpuTypes.from_value(type.to_i).to_cpu.price * amount.to_i
-            cybergarden.client.create_message(message.channel_id, "X - You don't have enough money! Balance: **#{money}**")
+            cybergarden.client.create_message(message.channel_id, "X - You don't have enough money! Balance: **#{money.humanize(precision: 2)}**")
             return
         end
         server = garden.servers.find {|i| i.name == name}.not_nil! 
