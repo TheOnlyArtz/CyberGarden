@@ -39,6 +39,10 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
         inline: true,
         name: "Total Servers",
         value: garden.servers.size.to_s
+      ),
+      Discord::EmbedField.new(
+        name: "Progress",
+        value: garden.get_progress_bar
       )
     ],
     description: description,

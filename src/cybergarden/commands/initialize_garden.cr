@@ -11,7 +11,8 @@ def Cybergarden::Commands.initialize_garden(cybergarden : Cybergarden::Client,
         id: message.author.id.to_s,
         money: Cybergarden::Items::CyberServerTierOne.price + Cybergarden::Items::CpuTypes.from_value(0).to_cpu.price,
         last_money_gain: Time.utc.to_unix,
-        servers: [] of Nil
+        servers: [] of Nil,
+        level: 1
     }
 
     r.db("cybergarden")
