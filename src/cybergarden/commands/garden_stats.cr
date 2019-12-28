@@ -44,12 +44,13 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
         value: garden.level.to_s
       ),
       Discord::EmbedField.new(
-        name: "Progress",
+        name: "Level Progress (cost: #{garden.get_next_upgrade_requirement.humanize(precision: 2)})",
         value: garden.get_progress_bar
       ),
     ],
     description: description,
-    colour: 16728579_u32
+    colour: 16728579_u32,
+    footer: Discord::EmbedFooter.new("Use the command #{Cybergarden::PREFIX}upgrade in order to buy a new level!")
   )
 
   cybergarden.client.create_message(message.channel_id, content: "", embed: embed)
