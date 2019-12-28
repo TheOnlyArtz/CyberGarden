@@ -21,6 +21,11 @@ def Cybergarden::Commands.buy(cybergarden : Cybergarden::Client,
     if type.to_i == Cybergarden::Items::ServerTypes.size || type.to_i < 0
       cybergarden.client.create_message(message.channel_id, "X - This item does not exist! please try again.")
       return
+    elsif garden.servers.size == Cybergarden::Garden.server_capacity(garden.level)
+      capacity = Cybergarden::Garden.server_capacity(garden.level)
+      content = "X - You can't own more than #{capacity} server(s) yet! level #{Cybergarden::Garden.level_to_capacity(garden.level, capacity + 1)} is required!"
+      cybergarden.client.create_message(message.channel_id, content)
+      return
     elsif garden.servers.find { |i| i.name == name } != nil
       cybergarden.client.create_message(message.channel_id, "X - You already own a server with that name.")
       return
@@ -30,6 +35,7 @@ def Cybergarden::Commands.buy(cybergarden : Cybergarden::Client,
     end
     Cybergarden::Utilities.add_server(type.to_i, garden, money, name, cybergarden)
     cybergarden.client.create_message(message.channel_id, "You've just bought a new server! Enjoy **#{name}** it's all yours.")
+    
   elsif product == "CPU"
     if type.to_i == Cybergarden::Items::CpuTypes.values.size || type.to_i < 0
       cybergarden.client.create_message(message.channel_id, "X - This item does not exist! please try again.")

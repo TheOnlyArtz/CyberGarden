@@ -54,7 +54,15 @@ struct Cybergarden::Garden
     bar
   end
 
-  def server_capacity
+  def self.server_capacity(level : Int32)
     ((level / 3) + 0.5).round.to_i
+  end
+
+  def self.level_to_capacity(level : Int32, target : Int32)
+    while self.server_capacity(level) != target
+      level += 1
+    end
+
+    level
   end
 end

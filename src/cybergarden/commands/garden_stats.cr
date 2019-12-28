@@ -36,7 +36,7 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
       Discord::EmbedField.new(
         inline: true,
         name: "Total Servers",
-        value: "#{garden.servers.size} out of #{garden.server_capacity}"
+        value: "#{garden.servers.size} out of #{Cybergarden::Garden.server_capacity(garden.level)}"
       ),
       Discord::EmbedField.new(
         inline: true,
