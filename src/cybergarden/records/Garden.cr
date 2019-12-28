@@ -46,11 +46,11 @@ struct Cybergarden::Garden
     requirement = self.get_next_upgrade_requirement
     progress = ((@money / requirement) * 10).to_i
 
-    starts = "["
-    progress.times { |i| starts += "===" if i < 10 }
-    (10 - progress).times { |_| starts += "---" }
-    starts += "]"
-
-    starts
+    bar = "["
+    progress.times { |i| bar += "===" if i < 10 }
+    (10 - progress).times { |_| bar += "---" }
+    bar += "]"
+    bar += " ✅" if progress >= 1
+    bar
   end
 end
