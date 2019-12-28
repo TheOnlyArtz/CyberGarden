@@ -7,6 +7,7 @@ DESCRIPTION_CPU = Cybergarden::Items::CpuTypes.values.map { |x|
 DESCRIPTION_SERVER = Cybergarden::Items::ServerTypes.map { |x|
     x.description
 }.unshift("**SERVERS SHOP**").join("\n")
+
 def Cybergarden::Commands.shop(cybergarden : Cybergarden::Client,
                                         message : Discord::Message,
                                         args : Array(String)) : Nil
