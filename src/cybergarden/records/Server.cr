@@ -70,6 +70,30 @@ SERVER_TYPES = {
     "capacity"     => 10,
     "type"         => 0,
   },
+  CyberServerTierTwo => {
+    "price"        => 25e6.to_i,
+    "maintability" => 1,
+    "capacity"     => 25,
+    "type"         => 1,
+  },
+  CyberServerTierThree => {
+    "price"        => 50e6.to_i,
+    "maintability" => 1,
+    "capacity"     => 40,
+    "type"         => 2,
+  },
+  CyberServerTierFour => {
+    "price"        => 100e6.to_i,
+    "maintability" => 1,
+    "capacity"     => 45,
+    "type"         => 3,
+  },
+  CyberServerTierFive => {
+    "price"        => 250e6.to_i,
+    "maintability" => 1,
+    "capacity"     => 100,
+    "type"         => 4,
+  },
 }
 
 module Cybergarden::Items
