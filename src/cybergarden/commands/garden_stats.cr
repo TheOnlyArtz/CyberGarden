@@ -21,7 +21,7 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
   embed = Discord::Embed.new(
     title: "Stats for #{message.author.username}'s garden",
     timestamp: Time.utc,
-    thumbnail: Discord::EmbedThumbnail.new("https://images.discerningassets.com/image/upload/q_auto:best/c_limit,h_1000,w_1000/v1567910812/IMG_8659_2_pqb1m6.jpg"),
+    # thumbnail: Discord::EmbedThumbnail.new(message.author.avatar),
     fields: [
       Discord::EmbedField.new(
         inline: true,
