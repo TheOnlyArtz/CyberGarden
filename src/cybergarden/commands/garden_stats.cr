@@ -31,7 +31,7 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
       Discord::EmbedField.new(
         inline: true,
         name: "Money per second",
-        value: garden.get_mps.to_s
+        value: garden.get_mps.humanize(precision: 2).to_s
       ),
       Discord::EmbedField.new(
         inline: true,
