@@ -1,8 +1,6 @@
 def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
-                                        message : Discord::Message,
-                                        args : Array(String)) : Nil
-
-
+                                       message : Discord::Message,
+                                       args : Array(String)) : Nil
   if !Cybergarden::Utilities.get_garden?(message.author.id, cybergarden)
     cybergarden.client.create_message(message.channel_id, "Looks like you don't own a garden :[ Please create one before proceeding!")
     return
@@ -14,7 +12,7 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
   description = garden.servers.map do |e|
     "[#{e.name}] -> #{e.size} CPUs out of #{e.capacity}"
   end
-  
+
   description.unshift("```css")
   description.unshift("")
   description << ("\n```")
@@ -41,15 +39,19 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
         value: garden.servers.size.to_s
       ),
       Discord::EmbedField.new(
+        inline: true,
+        name: "Level",
+        value: garden.level.to_s
+      ),
+      Discord::EmbedField.new(
         name: "Progress",
         value: garden.get_progress_bar
-      )
+      ),
     ],
     description: description,
     colour: 16728579_u32
   )
 
-  
   cybergarden.client.create_message(message.channel_id, content: "", embed: embed)
 
   nil

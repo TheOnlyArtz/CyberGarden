@@ -1,3 +1,3 @@
 Cybergarden::Items::ServerTypes = [
-    Cybergarden::Items::CyberServerTierOne
+  Cybergarden::Items::CyberServerTierOne,
 ]
