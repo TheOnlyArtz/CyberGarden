@@ -2,7 +2,7 @@ def Cybergarden::Utilities.level_up(garden : Cybergarden::Garden, money : Int32,
   r.db("cybergarden")
     .table("gardens")
     .get(garden.owner_id)
-    .update({level: garden.level + 1, money: money - garden.get_next_upgrade_requirement})
+    .update({level: garden.level + 1, money: money - garden.next_upgrade_requirements})
     .run(client.rethink.connection)
 
   nil

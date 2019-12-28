@@ -38,12 +38,12 @@ struct Cybergarden::Garden
   end
 
   # Returns the amount of money required to level up
-  def get_next_upgrade_requirement : Int32
+  def next_upgrade_requirements : Int32
     (@level * 1.75 * 1e6.to_i).to_i
   end
 
   def get_progress_bar : String
-    requirement = self.get_next_upgrade_requirement
+    requirement = self.next_upgrade_requirements
     progress = ((@money / requirement) * 10).to_i
 
     bar = "["
@@ -52,5 +52,9 @@ struct Cybergarden::Garden
     bar += "]"
     bar += " ✅" if progress >= 1
     bar
+  end
+
+  def get_server_capacity
+    
   end
 end

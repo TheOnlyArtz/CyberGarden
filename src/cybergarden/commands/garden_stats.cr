@@ -44,7 +44,7 @@ def Cybergarden::Commands.garden_stats(cybergarden : Cybergarden::Client,
         value: garden.level.to_s
       ),
       Discord::EmbedField.new(
-        name: "Level Progress (cost: #{garden.get_next_upgrade_requirement.humanize(precision: 2)})",
+        name: "Level Progress (cost: #{garden.next_upgrade_requirements.humanize(precision: 2)})",
         value: garden.get_progress_bar
       ),
     ],
