@@ -54,7 +54,7 @@ struct Cybergarden::Garden
     bar
   end
 
-  def get_server_capacity
-    
+  def server_capacity
+    ((level / 3) + 0.5).round.to_i
   end
 end
